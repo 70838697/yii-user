@@ -26,6 +26,7 @@ $this->menu=array(
 	'htmlOptions' => array('enctype'=>'multipart/form-data'),
 )); ?>
 
+
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
@@ -33,7 +34,7 @@ $this->menu=array(
 <?php 
 		$profileFields=$profile->getFields();
 		if ($profileFields) {
-			foreach($profileFields as $field) {
+			foreach($profileFields as $field) { if($field->visible!=ProfileField::VISIBLE_ALL_READONLY){
 			?>
 	<div class="row">
 		<?php echo $form->labelEx($profile,$field->varname);
@@ -45,11 +46,17 @@ $this->menu=array(
 		} elseif ($field->field_type=="TEXT") {
 			echo $form->textArea($profile,$field->varname,array('rows'=>6, 'cols'=>50));
 		} else {
-			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
+			$fieldname=$field->varname;
+			if(UUserIdentity::isCommonUser() ||(($fieldname!='firstname')&&($fieldname!='lastname'))) {
+				echo CHtml::activeTextField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
+			}else{
+				echo CHtml::encode($profile->$fieldname);
+			}
 		}
 		echo $form->error($profile,$field->varname); ?>
 	</div>	
 			<?php
+			}
 			}
 		}
 ?>
