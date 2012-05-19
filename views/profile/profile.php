@@ -7,7 +7,7 @@ $this->menu=array(
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
 	((UUserIdentity::isCommonUser())
-		?array('label'=>UserModule::t('Become a JNUer'), 'url'=>array('/jnuer/update/'.Yii::app()->user->id))
+		?array('label'=>UserModule::t('Become a Colledge Member'), 'url'=>array('/schoolInfo/update/'.Yii::app()->user->id))
 		:array()),
     array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
     array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
