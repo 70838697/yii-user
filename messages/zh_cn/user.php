@@ -99,7 +99,7 @@ return array(
 	'Position' => '位置',
 	'Visible' => '显示',
 	'Registered users' => '已注册用户',
-	'For all' => '全部课件',
+	'For all' => '全部用户',
 	'Only owner' => '仅本人',
 	'Hidden' => '隐藏',
 	'Profile Fields' => '个人配置字段',
@@ -125,4 +125,10 @@ return array(
 	'The value of the default field (database).' => '数据库中该字段的缺省值。',
 	'Display order of fields.' => '该字段的显示次序。',
 	'Not visited' => '未访问',
+	
+	'Birthday' => '出生日期',	
+	'Nick Name' => '昵称',	
+	'For all read only'=>'所有人只读',
+	'Group'=>'分组',
+	
 );
