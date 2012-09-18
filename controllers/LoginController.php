@@ -25,8 +25,6 @@ class LoginController extends Controller
 				$model->attributes=$_POST['UserLogin'];
 				// validate user input and redirect to previous page if valid
 				if($model->validate()) {
-					$this->lastViset();
-					
 					$redirectUrl=Yii::app()->user->returnUrl;
 					//check returnUrl
 					if ($redirectUrl=='/index.php'||$redirectUrl===null)
@@ -44,7 +42,14 @@ class LoginController extends Controller
 					}
 					//clean the referer url
 					Yii::app()->user->setState('login_from_url',null);
+					
+					if(!$this->lastViset())
+					{
+						//if it is his first login
+						$redirectUrl=Yii::app()->controller->module->firstLoginUrl;
+					}
 					$this->redirect($redirectUrl);
+						
 				}
 			}
 			// display the login form
@@ -55,8 +60,10 @@ class LoginController extends Controller
 	
 	private function lastViset() {
 		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
+		$isNotFirstTime=($lastVisit->lastvisit != 0);
 		$lastVisit->lastvisit = time();
 		$lastVisit->save();
+		return $isNotFirstTime;
 	}
 
 }
