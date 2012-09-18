@@ -11,6 +11,7 @@ class LoginController extends Controller
 	{
 		
 		if (Yii::app()->user->isGuest) {
+			//remember referrer url
 			$defaultUrl = Yii::app()->getRequest()->getUrlReferrer();
 			if ($defaultUrl &&(strpos($defaultUrl,'user/login')===false))
 			{
@@ -27,13 +28,27 @@ class LoginController extends Controller
 					if(Yii::app()->user->getState('login_from_url'))
 					{
 						Yii::app()->user->setReturnUrl(Yii::app()->user->getState('login_from_url'));
-						Yii::app()->user->setState('login_from_url',null);
 					}
 					$this->lastViset();
-					if (Yii::app()->user->returnUrl=='/index.php')
-						$this->redirect(Yii::app()->controller->module->returnUrl);
+					
+					$redirectUrl=Yii::app()->user->returnUrl;
+					//check returnUrl
+					if ($redirectUrl=='/index.php'||$redirectUrl===null)
+					{
+						//returnUrl is not set,user referer url
+						$redirectUrl=Yii::app()->user->getState('login_from_url')
+						//use default url;
+						if(!$redirectUrl)
+							$redirectUrl=Yii::app()->controller->module->returnUrl;
+					}
 					else
-						$this->redirect(Yii::app()->user->returnUrl);
+					{
+						//clean the returnUrl
+						Yii::app()->user->setReturnUrl(null);
+					}
+					//clean the referer url
+					Yii::app()->user->setState('login_from_url',null);
+					$this->redirect($redirectUrl);
 				}
 			}
 			// display the login form
