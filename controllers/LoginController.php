@@ -36,7 +36,7 @@ class LoginController extends Controller
 					if ($redirectUrl=='/index.php'||$redirectUrl===null)
 					{
 						//returnUrl is not set,user referer url
-						$redirectUrl=Yii::app()->user->getState('login_from_url')
+						$redirectUrl=Yii::app()->user->getState('login_from_url');
 						//use default url;
 						if(!$redirectUrl)
 							$redirectUrl=Yii::app()->controller->module->returnUrl;
