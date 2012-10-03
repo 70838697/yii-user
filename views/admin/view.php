@@ -23,7 +23,7 @@ $this->menu=array(
 		'username',
 	);
 	
-	$profileFields=ProfileField::model()->forOwner()->sort()->findAll();
+	$profileFields=ProfileField::model()->sort()->findAll();
 	if ($profileFields) {
 		foreach($profileFields as $field) {
 			array_push($attributes,array(
