@@ -50,7 +50,7 @@ return array(
 	'Your profile' => '您的个人设置',
 	'Thank you for your registration. Please check your email or login.' => '感谢您的注册。请检查您的邮件或者登录。',
 	'Thank you for your registration. Please check your email.' => '感谢您的注册。请检查您的邮件。',
-	'Please check your email. An instructions was sent to your email address.' => '请假差您的邮件。有封注册信已发到您的邮箱。',
+	'Please check your email. An instructions was sent to your email address.' => '请检查您的邮件。有封注册信已发到您的邮箱。',
 	'Thank you for your registration. Please {{login}}.' =>  '感谢您的注册。请{{login}}。',
 	'Thank you for your registration. Contact Admin to activate your account.' =>  '感谢您的注册，请联系管理员激活您的账号。',
 	'Restore' => '重设密码',
